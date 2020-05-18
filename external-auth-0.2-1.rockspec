@@ -14,7 +14,7 @@ description = {
   ]]
 }
 dependencies = {
-  "luajson ~> 1.3"
+  "luajson >= 1.3"
 }
 build = {
   type = "builtin",

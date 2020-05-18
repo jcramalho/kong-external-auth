@@ -15,6 +15,7 @@ In any other case, `401` (Unauthorized) is returned to the client.
 ## Installation
 
 ```bash
+$ luarocks install luajson
 $ luarocks install --server=https://luarocks.org/manifests/jcm300 external-auth
 ```
 

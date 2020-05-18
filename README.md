@@ -15,7 +15,7 @@ In any other case, `401` (Unauthorized) is returned to the client.
 ## Installation
 
 ```bash
-$ luarocks install external-auth
+$ luarocks install --server=https://luarocks.org/manifests/jcm300 external-auth
 ```
 
 Update the `plugins` config to add `external-auth`:

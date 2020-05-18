@@ -27,8 +27,10 @@ function ExternalAuthHandler:access(conf)
     return kong.response.exit(500, {message=err})
   end
 
-  if res.status ~= 200 then
-    return kong.response.exit(401, {message="Invalid authentication credentials"})
+  if res.status == 403 then
+    return kong.response.exit(403, {message=conf.message_403})
+  elseif res.status ~= 200 then
+    return kong.response.exit(401, {message=conf.message_401})
   end
 end
 

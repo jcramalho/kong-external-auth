@@ -9,6 +9,7 @@ This plugin lets you authenticate any request using a separate HTTP service.
 For every incoming request, the `method`, `path`, `query` and `headers` are forwarded to the auth service (removing the body).
 
 If the service returns `200`, the request continues the normal path.
+if the service returns `403`, `403` (Forbidden) is returned to the client.
 In any other case, `401` (Unauthorized) is returned to the client.
 
 ## Installation
@@ -39,6 +40,9 @@ $ curl -X POST http://kong:8001/services/{service}/plugins \
 | `config.connect_timeout` | 10000 | Connection timeout (in ms) to the provided url. |
 | `config.send_timeout` | 60000 | Send timeout (in ms) to the provided url. |
 | `config.read_timeout` | 60000 | Read timeout (in ms) to the provided url. |
+| `config.message_401` | "Unauthorized" | Error message for 401 responses. |
+| `config.message_403` | "You don't have enough permissions to access" | Error message for 403 responses. |
+
 
 ### TODO
 - Allow auth service response headers to be inserted to the request (currently, only the status code of the response is used).
@@ -50,7 +54,7 @@ Inspired on Ambassador's auth service
 
 https://www.getambassador.io/reference/services/auth-service
 
-## Author
+## Original Author
 Pablo Romanelli
 
 ## License

@@ -1,6 +1,6 @@
 local BasePlugin = require "kong.plugins.base_plugin"
 local http = require "resty.http"
-local json = require "json"
+local json = require "cjson"
 
 local kong = kong
 
@@ -16,7 +16,7 @@ function ExternalAuthHandler:access(conf)
   local client = http.new()
   client:set_timeouts(conf.connect_timeout, send_timeout, read_timeout)
 
-  local body = json.encode({
+  local body_value = json.encode({
     method = kong.request.get_method(),
     path = kong.request.get_path(),
     query = kong.request.get_query(),
@@ -26,7 +26,10 @@ function ExternalAuthHandler:access(conf)
   local res, err = client:request_uri(conf.url, {
     method = "POST",
     path = conf.path,
-    body = body
+    body = body_value,
+    headers = {
+        ["Content-Type"] = "application/json"
+    }
   })
 
   if not res then
@@ -41,6 +44,6 @@ function ExternalAuthHandler:access(conf)
 end
 
 ExternalAuthHandler.PRIORITY = 900
-ExternalAuthHandler.VERSION = "0.2.0"
+ExternalAuthHandler.VERSION = "0.2.1"
 
 return ExternalAuthHandler

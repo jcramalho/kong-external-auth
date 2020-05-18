@@ -14,10 +14,10 @@ description = {
   ]]
 }
 dependencies = {
-  "luajson >= 1.3"
+  "lua-cjson >= 2.1"
 }
 build = {
-  type = "builtin",
+  type = "module",
   modules = {
     ["kong.plugins.external-auth.handler"] = "src/handler.lua",
     ["kong.plugins.external-auth.schema"] = "src/schema.lua"

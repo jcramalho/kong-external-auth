@@ -6,7 +6,7 @@ Kong plugin to authenticate requests using http services.
 
 This plugin lets you authenticate any request using a separate HTTP service.
 
-For every incoming request, the `method`, `path`, `query` and `headers` are forwarded to the auth service (removing the body).
+For every incoming request, the `method`, `path`, `query` and `headers` are forwarded in body request to the route `POST /auth` of auth service.
 
 If the service returns `200`, the request continues the normal path.
 if the service returns `403`, `403` (Forbidden) is returned to the client.
@@ -37,6 +37,7 @@ $ curl -X POST http://kong:8001/services/{service}/plugins \
 | Parameter | default | description |
 | ---       | ---     | ---         |
 | `config.url` | [required] | Service receiving the original request method, path, query, headers. **Http** and **https** are allowed. |
+| `config.path` | "/auth" | Path on auth service where the POST requests will be made. |
 | `config.connect_timeout` | 10000 | Connection timeout (in ms) to the provided url. |
 | `config.send_timeout` | 60000 | Send timeout (in ms) to the provided url. |
 | `config.read_timeout` | 60000 | Read timeout (in ms) to the provided url. |

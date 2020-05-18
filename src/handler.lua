@@ -1,5 +1,6 @@
 local BasePlugin = require "kong.plugins.base_plugin"
 local http = require "resty.http"
+local json = require "json"
 
 local kong = kong
 
@@ -15,12 +16,17 @@ function ExternalAuthHandler:access(conf)
   local client = http.new()
   client:set_timeouts(conf.connect_timeout, send_timeout, read_timeout)
 
-  local res, err = client:request_uri(conf.url, {
+  local body = json.encode({
     method = kong.request.get_method(),
     path = kong.request.get_path(),
-    query = kong.request.get_raw_query(),
-    headers = kong.request.get_headers(),
-    body = ""
+    query = kong.request.get_query(),
+    headers = kong.request.get_headers()
+  }) 
+
+  local res, err = client:request_uri(conf.url, {
+    method = "POST",
+    path = conf.path,
+    body = body
   })
 
   if not res then

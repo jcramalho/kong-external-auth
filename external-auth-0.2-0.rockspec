@@ -3,7 +3,7 @@ version = "0.2-0"
 supported_platforms = {"linux", "macosx"}
 source = {
   url = "git://github.com/jcm300/kong-external-auth",
-  tag = "0.2-0"
+  tag = "master"
 }
 description = {
   summary = "Kong plugin to authenticate requests using http services.",

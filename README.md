@@ -8,14 +8,13 @@ This plugin lets you authenticate any request using a separate HTTP service.
 
 For every incoming request, the `method`, `path`, `query` and `headers` are forwarded in body request to the route `POST /auth` of auth service.
 
-If the service returns `200`, the request continues the normal path.
+If the service returns `200`, the request continues the normal path and the service body response is put as string in "CLAV-Auth" header.
 if the service returns `403`, `403` (Forbidden) is returned to the client.
 In any other case, `401` (Unauthorized) is returned to the client.
 
 ## Installation
 
 ```bash
-$ luarocks install luajson
 $ luarocks install --server=https://luarocks.org/manifests/jcm300 external-auth
 ```
 
@@ -44,6 +43,7 @@ $ curl -X POST http://kong:8001/services/{service}/plugins \
 | `config.read_timeout` | 60000 | Read timeout (in ms) to the provided url. |
 | `config.message_401` | "Unauthorized" | Error message for 401 responses. |
 | `config.message_403` | "You don't have enough permissions to access" | Error message for 403 responses. |
+| `config.header` | "CLAV-Auth" | Header where the service body response goes in normal path. |
 
 
 ### TODO

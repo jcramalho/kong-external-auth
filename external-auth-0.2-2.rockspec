@@ -1,9 +1,9 @@
 package = "external-auth"
-version = "0.2-1"
+version = "0.2-2"
 supported_platforms = {"linux", "macosx"}
 source = {
   url = "git://github.com/jcm300/kong-external-auth",
-  tag = "0.2-1"
+  tag = "0.2-2"
 }
 description = {
   summary = "Kong plugin to authenticate requests using http services.",

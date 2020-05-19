@@ -40,6 +40,8 @@ function ExternalAuthHandler:access(conf)
     return kong.response.exit(403, {message=conf.message_403})
   elseif res.status ~= 200 then
     return kong.response.exit(401, {message=conf.message_401})
+  else
+    kong.service.request.set_header(conf.header, res.body)
   end
 end
 

@@ -8,6 +8,7 @@ return {
     read_timeout = { default = 60000, type = "number" },
     message_401 = { default = "Unauthorized", type = "string" },
     message_403 = { default = "You don't have enough permissions to access", type = "string" },
+    message_404 = { default = "Not Found", type = "string" },
     header = { default = "CLAV-Auth", type = "string" }
   }
 }

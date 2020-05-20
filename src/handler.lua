@@ -38,6 +38,8 @@ function ExternalAuthHandler:access(conf)
 
   if res.status == 403 then
     return kong.response.exit(403, {message=conf.message_403})
+  elseif res.status == 404 then
+    return kong.response.exit(404, {message=conf.message_404})
   elseif res.status ~= 200 then
     return kong.response.exit(401, {message=conf.message_401})
   else

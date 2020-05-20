@@ -43,6 +43,7 @@ $ curl -X POST http://kong:8001/services/{service}/plugins \
 | `config.read_timeout` | 60000 | Read timeout (in ms) to the provided url. |
 | `config.message_401` | "Unauthorized" | Error message for 401 responses. |
 | `config.message_403` | "You don't have enough permissions to access" | Error message for 403 responses. |
+| `config.message_404` | "Not Found" | Error message for 404 responses. |
 | `config.header` | "CLAV-Auth" | Header where the service body response goes in normal path. |
 
 
